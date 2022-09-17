@@ -1,44 +1,17 @@
-import { useState, useEffect, useMemo } from 'react';
-import typeIcons from './typeIcons.json';
+import { useState, useMemo } from 'react';
+import Weaknesses from './weaknesses';
 
-function TemList() {
+function TemList({ tems }) {
 
-	const [temData, setTemData] = useState([]);
 	const [search, setSearch] = useState('');
-
-	useEffect(() => {
-		if (!temData.length) {
-		fetch('https://temtem-api.mael.tech/api/temtems?weaknesses=true').then((res) => res.json()).then((data) => setTemData(data));
-		}
-	});
 	
 	const checkMatch = (name, number, string) => (
 		name.toLowerCase().includes(string) ||
 		number.toString().includes(string)
 	);
 
-	const getWeaknesses = (data, types, mode) => types.map((type) => {
-		if (data[type] >= 2 && mode === 'weak') {
-			return (
-				<div className='tem-weakness'>
-					<img className='tem-type' src={typeIcons[type]} alt={type} />
-				</div>
-			)
-		}
-		else if (data[type] < 1 && mode === 'strong') {
-			return (
-				<div className='tem-weakness'>
-					<img className='tem-type' src={typeIcons[type]} alt={type} />
-				</div>
-			)
-		}
-		else return undefined;
-	}).filter((type) => type !== undefined);
-
 	const temList = useMemo(() => {
-		return temData.map((tem) => {
-			const weaknesses = getWeaknesses(tem.weaknesses, Object.keys(tem.weaknesses), 'weak');
-			const strengths = getWeaknesses(tem.weaknesses, Object.keys(tem.weaknesses), 'strong');
+		return tems.map((tem) => {
 
 			if (checkMatch(tem.name, tem.number, search)) {
 				return (
@@ -49,25 +22,14 @@ function TemList() {
 								<p className='tem-number'>#{tem.number}</p>
 								<h3 className='tem-name'>{tem.name}</h3>
 							</div>
-							<div className='tem-types'>
-								{weaknesses.length ? 
-									<div className='tem-statlist'>
-										Weak to <div className='tem-type-group' style={{background: 'rgba(0, 255, 0, 0.3)'}}>{weaknesses}</div>
-									</div>
-								: ''}
-								{strengths?.length ? 
-									<div className='tem-statlist'>
-										Strong against <div className='tem-type-group' style={{background: 'rgba(255, 0, 0, 0.5)'}}>{strengths}</div>
-									</div>
-								: ''}
-							</div>
+							<Weaknesses tem={tem} />
 						</div>
 					</div>
 				)
 			}
 			else return undefined;
 			}).filter((tem) => tem !== undefined);
-	}, [temData, search]);
+	}, [tems, search]);
 
 	return (
 		<div className="tem-list">
