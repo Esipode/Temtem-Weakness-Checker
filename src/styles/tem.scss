@@ -1,5 +1,9 @@
 .tem-wrapper {
-  display: flex;
+  width: 350px;
+
+  @include desktop {
+    width: 700px;
+  }
 
   .tem-portrait {
       border: 4px solid $mainColor;

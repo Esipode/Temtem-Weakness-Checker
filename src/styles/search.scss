@@ -1,5 +1,5 @@
 .search {
-  width: 100%;
+  width: 350px;
   margin-top: 5vh;
   margin-bottom: 20px;
   padding: 0 18px;
@@ -13,9 +13,10 @@
   transition: all 0.1s linear;
 
   @include desktop {
+    width: 700px;
     height: 60px;
-      padding: 24px;
-      font-size: 24px;
+    padding: 24px;
+    font-size: 24px;
   }
 
   &::placeholder {
