@@ -3,17 +3,17 @@ import typeIcons from './typeIcons.json';
 
 function Weaknesses({ tem }) {
 
-	const getWeaknesses = (data, types, mode) => types.map((type) => {
+	const getWeaknesses = (data, types, name, mode) => types.map((type) => {
 		if (data[type] >= 2 && mode === 'weak') {
 			return (
-				<div className='tem-weakness' key={`${tem.name}-${type}`}>
+				<div className='tem-weakness' key={`${name}-${type}`}>
 					<img className='tem-type' src={typeIcons[type]} alt={type} />
 				</div>
 			)
 		}
 		else if (data[type] < 1 && mode === 'strong') {
 			return (
-				<div className='tem-weakness' key={`${tem.name}-${type}`}>
+				<div className='tem-weakness' key={`${name}-${type}`}>
 					<img className='tem-type' src={typeIcons[type]} alt={type} />
 				</div>
 			)
@@ -23,8 +23,8 @@ function Weaknesses({ tem }) {
 
 	const types = useMemo(() => {
 		return {
-			weak: getWeaknesses(tem.weaknesses, Object.keys(tem.weaknesses), 'weak'),
-			strong: getWeaknesses(tem.weaknesses, Object.keys(tem.weaknesses), 'strong'),
+			weak: getWeaknesses(tem.weaknesses, Object.keys(tem.weaknesses), tem.name, 'weak'),
+			strong: getWeaknesses(tem.weaknesses, Object.keys(tem.weaknesses), tem.name, 'strong'),
 		}
 	}, [tem]);
 
