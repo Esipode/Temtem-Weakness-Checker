@@ -16,7 +16,7 @@
       gap: 20px;
       overflow-y: scroll;
       width: 100%;
-      max-height: calc(75vh - 40px);
+      max-height: calc(85vh - 40px);
 
       @include desktop {
           gap: 35px;
