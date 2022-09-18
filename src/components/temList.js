@@ -11,9 +11,16 @@ function TemList({ tems }) {
 	)
 
 	const temList = useMemo(() => {
-		const searchRegex = new RegExp(search); // instancing before loop
-		if (!search || !search.length || !!"".match(searchRegex)) return tems;
-		return tems.filter(tem => checkMatchRegex(tem, searchRegex));
+		const searchRegex = new RegExp(search);
+		let temsToShow = [];
+
+		if (!search || !search.length || !!"".match(searchRegex)) {
+			temsToShow = tems;
+		} else {
+			temsToShow = tems.filter(tem => checkMatchRegex(tem, searchRegex));
+		}
+
+		return new Set(temsToShow.map(tem => tem.number));
 	}, [tems, search]);
 
 	return (
@@ -25,8 +32,8 @@ function TemList({ tems }) {
 				placeholder='Search Temtem here...'
 			/>
 			<div className='tem-container'>
-				{temList.map((tem) => (
-					<div className='tem-wrapper' key={tem.name}>
+				{tems.map((tem) => (
+					<div className='tem-wrapper' key={tem.name} style={{display: temList.has(tem.number) ? "inherit" : "none"}}>
 						<img className='tem-portrait' src={tem.wikiPortraitUrlLarge} alt={tem.name} />
 						<div className='tem-info'>
 							<div className='tem-title'>
@@ -38,7 +45,7 @@ function TemList({ tems }) {
 					</div>
 				))}
 				{
-					!temList.length && search?.length && (
+					!temList.size && search?.length && (
 						<p className='tem-missing-warning'>
 							<span className='tem-warning tem-tag'>⚠</span> No Temtem with that <span className='tem-tag'>name </span> or <span className='tem-tag'>number</span> found
 						</p>
