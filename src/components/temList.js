@@ -11,7 +11,7 @@ function TemList({ tems }) {
 	)
 
 	const temList = useMemo(() => {
-		const searchRegex = new RegExp(search);
+		const searchRegex = new RegExp(search, "i");
 		let temsToShow = [];
 
 		if (!search || !search.length || !!"".match(searchRegex)) {
