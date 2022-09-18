@@ -7,6 +7,7 @@ function Weaknesses({ tem }) {
 		if (data[type] >= 2 && mode === 'weak') {
 			return (
 				<div className='tem-weakness' key={`${name}-${type}`}>
+					<div className='tem-multiplier'>x{data[type]}</div>
 					<img className='tem-type' src={typeIcons[type]} alt={type} />
 				</div>
 			)
@@ -14,6 +15,7 @@ function Weaknesses({ tem }) {
 		else if (data[type] < 1 && mode === 'strong') {
 			return (
 				<div className='tem-weakness' key={`${name}-${type}`}>
+					<div className='tem-multiplier'>x{data[type]}</div>
 					<img className='tem-type' src={typeIcons[type]} alt={type} />
 				</div>
 			)
@@ -37,7 +39,7 @@ function Weaknesses({ tem }) {
 			: ''}
 			{types.strong?.length ? 
 				<div className='tem-statlist'>
-					Strong against <div className='tem-type-group' style={{background: 'rgba(255, 0, 0, 0.5)'}}>{types.strong}</div>
+					Resists <div className='tem-type-group' style={{background: 'rgba(255, 0, 0, 0.5)'}}>{types.strong}</div>
 				</div>
 			: ''}
 		</div>
