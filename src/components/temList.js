@@ -4,30 +4,16 @@ import Weaknesses from './weaknesses';
 function TemList({ tems }) {
 
 	const [search, setSearch] = useState('');
-	
-	const checkMatch = (name, number, string) => (
-		name.toLowerCase().includes(string) ||
-		number.toString().includes(string)
-	);
+
+	const checkMatchRegex = (tem, searchRegex) => (
+		tem.name.toLowerCase().match(searchRegex) || 
+		tem.number.toString().match(searchRegex)		
+	)
 
 	const temList = useMemo(() => {
-		return tems.map((tem) => {
-			if (checkMatch(tem.name, tem.number, search.toLowerCase())) {
-				return (
-					<div className='tem-wrapper' key={tem.name}>
-						<img className='tem-portrait' src={tem.wikiPortraitUrlLarge} alt={tem.name} />
-						<div className='tem-info'>
-							<div className='tem-title'>
-								<p className='tem-number'>#{tem.number}</p>
-								<h3 className='tem-name'>{tem.name}</h3>
-							</div>
-							<Weaknesses tem={tem} />
-						</div>
-					</div>
-				)
-			}
-			else return undefined;
-			}).filter((tem) => tem !== undefined);
+		const searchRegex = new RegExp(search); // instancing before loop
+		if (!search || !search.length || !!"".match(searchRegex)) return tems;
+		return tems.filter(tem => checkMatchRegex(tem, searchRegex));
 	}, [tems, search]);
 
 	return (
@@ -39,7 +25,18 @@ function TemList({ tems }) {
 				placeholder='Search Temtem here...'
 			/>
 			<div className='tem-container'>
-				{temList}
+				{temList.map((tem) => (
+					<div className='tem-wrapper' key={tem.name}>
+						<img className='tem-portrait' src={tem.wikiPortraitUrlLarge} alt={tem.name} />
+						<div className='tem-info'>
+							<div className='tem-title'>
+								<p className='tem-number'>#{tem.number}</p>
+								<h3 className='tem-name'>{tem.name}</h3>
+							</div>
+							<Weaknesses tem={tem} />
+						</div>
+					</div>
+				))}
 				{
 					!temList.length && search?.length && (
 						<p className='tem-missing-warning'>
