@@ -1,6 +1,6 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
+  "name": "temtem-weakness-checker",
+  "version": "1.0.1",
   "homepage": ".",
   "private": true,
   "devDependencies": {
