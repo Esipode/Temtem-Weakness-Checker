@@ -12,7 +12,7 @@ function TemList({ tems }) {
 
 	const temList = useMemo(() => {
 		return tems.map((tem) => {
-			if (checkMatch(tem.name, tem.number, search)) {
+			if (checkMatch(tem.name, tem.number, search.toLowerCase())) {
 				return (
 					<div className='tem-wrapper' key={tem.name}>
 						<img className='tem-portrait' src={tem.wikiPortraitUrlLarge} alt={tem.name} />
