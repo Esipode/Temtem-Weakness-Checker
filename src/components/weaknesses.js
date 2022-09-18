@@ -6,14 +6,14 @@ function Weaknesses({ tem }) {
 	const getWeaknesses = (data, types, mode) => types.map((type) => {
 		if (data[type] >= 2 && mode === 'weak') {
 			return (
-				<div className='tem-weakness'>
+				<div className='tem-weakness' key={`${tem.name}-${type}`}>
 					<img className='tem-type' src={typeIcons[type]} alt={type} />
 				</div>
 			)
 		}
 		else if (data[type] < 1 && mode === 'strong') {
 			return (
-				<div className='tem-weakness'>
+				<div className='tem-weakness' key={`${tem.name}-${type}`}>
 					<img className='tem-type' src={typeIcons[type]} alt={type} />
 				</div>
 			)

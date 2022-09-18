@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import './App.scss';
+import './styles/App.scss';
 import TemList from './components/temList';
 
 function App() {

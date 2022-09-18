@@ -12,10 +12,9 @@ function TemList({ tems }) {
 
 	const temList = useMemo(() => {
 		return tems.map((tem) => {
-
 			if (checkMatch(tem.name, tem.number, search)) {
 				return (
-					<div className='tem-wrapper'>
+					<div className='tem-wrapper' key={tem.name}>
 						<img className='tem-portrait' src={tem.wikiPortraitUrlLarge} alt={tem.name} />
 						<div className='tem-info'>
 							<div className='tem-title'>

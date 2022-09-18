@@ -1,0 +1,28 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Rubik;
+}
+
+$desktop: 768px;
+
+@mixin desktop {
+    @media (min-width: 768px) { @content; }
+}
+
+$background: #1e070f;
+$mainColor: #3ef0bb;
+$medColor: #2c866b;
+$darkColor: #243631;
+$transBlack: rgba(0, 0, 0, 0.7);
+
+.App {
+    display: flex;
+    justify-content: center;
+    min-width: 100vw;
+    min-height: 100vh;
+    background: $background;
+
+    @import 'temList.scss';
+}

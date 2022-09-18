@@ -1,0 +1,53 @@
+.tem-types {
+  display: flex;
+  flex-direction: column;
+  margin-top: 6px;
+
+  @include desktop {
+      margin-top: 12px;
+      flex-direction: row;
+      gap: 10px;
+  }
+
+  .tem-statlist {
+      display: flex;
+      align-items: center;
+      font-style: italic;
+      text-transform: uppercase;
+      font-size: 12px;
+      margin-top: 5px;
+
+      @include desktop {
+          font-size: 18px;
+          flex-direction: column;
+      }
+
+      .tem-type-group {
+          display: flex;
+          border-radius: 15px;
+          margin-left: 8px;
+          padding: 2px 6px;
+
+          @include desktop {
+              margin-left: 0;
+              margin-top: 8px;
+              border-radius: 30px;
+          }
+
+          .tem-weakness {
+              display: flex;
+              flex-direction: row;
+
+              .tem-type {
+                  width: 20px;
+                  height: 20px;
+
+                  @include desktop {
+                      width: 50px;
+                      height: 50px;
+                  }
+              }
+          }
+      }
+  }
+}
