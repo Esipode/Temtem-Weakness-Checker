@@ -1,0 +1,222 @@
+@keyframes fadeIn {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+.party-modal-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $transBlack;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  animation-name: fadeIn;
+  animation-duration: 0.25s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+
+  .party-modal {
+    position: relative;
+    border: 1px solid $mainColor;
+    border-radius: 12px;
+    height: 270px;
+    width: 300px;
+    background: $transBlack;
+    backdrop-filter: blur(10px);
+    overflow: hidden;
+
+    @include desktop {
+      width: 500px;
+      height: auto;
+      border-radius: 12px 24px 12px 12px;
+    }
+
+    .close-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 3;
+      cursor: pointer;
+      color: $mainColor;
+      font-size: 20px;
+      border: 1px solid $mainColor;
+      background: black;
+      width: 20px;
+      height: 20px;
+      border-radius: 20px;
+      padding-bottom: 3px;
+      transition: all 0.1s linear;
+
+      &:hover {
+        color: $medColor;
+      }
+
+      @include desktop {
+        font-size: 40px;
+        width: 40px;
+        height: 40px;
+        padding-bottom: 5px;
+      }
+    }
+
+    .modal-top {
+      display: flex;
+      flex-direction: row;
+
+      .modal-portrait {
+        border: 1px solid $mainColor;
+        border-left: none;
+        border-top: none;
+        background: $darkColor;
+        border-radius: 0 0 12px 0;
+        height: 100px;
+        width: 100px;
+        z-index: 1;
+
+        @include desktop {
+          height: 150px;
+          width: 150px;
+        }
+      }
+    
+      .modal-info {
+          display: inline-flex;
+          flex-direction: column;
+          border-radius: 0 20px 20px 0;
+          color: $mainColor;
+          padding: 6px 18px 6px 60px;
+          margin-left: -50px;
+          font-size: 16px;
+          position: relative;
+          width: 100%;
+
+          @include desktop {
+            font-size: 24px;
+          }
+    
+          .modal-title {
+              display: inline-flex;
+              align-items: center;
+    
+              .modal-number {
+                  opacity: 0.7;
+                  font-style: italic;
+              }
+    
+              .modal-name {
+                  margin-left: 8px;
+    
+                  @include desktop {
+                      margin-left: 14px;
+                  }
+              }
+          }
+    
+          @import 'weakness.scss';
+      }
+    }
+
+    .modal-mid {
+      padding: 10px;
+
+      .toggle-party {
+        display: none;
+      }
+
+      .toggle-party-label {
+        cursor: pointer;
+        position: relative;
+        color: $mainColor;
+        padding-left: 28px;
+
+        &:before {
+          position: absolute;
+          top: 0;
+          left: 0;
+          content: '';
+          background: $transBlack;
+          border: 1px solid $mainColor;
+          border-radius: 4px;
+          width: 20px;
+          height: 20px;
+          font-size: 16px;
+          text-align: center;
+          line-height: 20px;
+        }
+
+        &.checked {
+          &:before {
+            content: '\2713';
+          }
+        }
+      }
+
+      .save-btn {
+        cursor: pointer;
+        border: 1px solid $mainColor;
+        border-radius: 4px;
+        outline: none;
+        background: $transBlack;
+        color: $mainColor;
+        font-size: 16px;
+        margin-left: 16px;
+        padding: 2px 6px;
+        transition: all 0.1s linear;
+
+        &:hover {
+            color: $medColor;
+            border: 1px solid $medColor;
+        }
+
+        &:disabled {
+          cursor: default;
+          pointer-events: none;
+          color: $darkColor;
+          border: 1px solid $darkColor;
+        }
+
+        @include desktop {
+          font-size: 22px;
+          margin-left: 72px;
+        }
+      }
+    }
+
+    .modal-bottom {
+      display: flex;
+      flex-wrap: wrap;
+      border-top: 1px solid $mainColor;
+      position: relative;
+      margin-top: 10px;
+      padding-top: 10px;
+
+      &:before {
+        content: 'Current moveset types';
+        position: absolute;
+        color: $mainColor;
+        background: black;
+        border: 1px solid $mainColor;
+        border-radius: 10px;
+        font-size: 14px;
+        width: 150px;
+        top: -12px;
+        left: calc(50% - 82px);
+        padding: 2px 6px;
+
+      }
+
+      .type {
+        height: auto;
+        width: calc(100% / 6);
+        transition: all 0.1s linear;
+      }
+    }
+  }
+}

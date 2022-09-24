@@ -4,9 +4,35 @@
   margin-top: 6px;
 
   @include desktop {
-      margin-top: 12px;
-      flex-direction: row;
-      gap: 10px;
+    &:not(.force-mobile) {
+        margin-top: 12px;
+        flex-direction: row;
+        gap: 10px;
+
+        .tem-statlist {
+            font-size: 18px;
+            flex-direction: column;
+      
+            .tem-type-group {
+                margin-left: 0;
+                margin-top: 8px;
+                border-radius: 8px;
+      
+                .tem-weakness {
+      
+                    .tem-multiplier {
+                        display: block;
+                        font-size: 12px;
+                    }
+      
+                    .tem-type {
+                        width: 50px;
+                        height: 50px;
+                    }
+                }
+            }
+        }
+    }
   }
 
   .tem-statlist {
@@ -17,22 +43,11 @@
       font-size: 12px;
       margin-top: 5px;
 
-      @include desktop {
-          font-size: 18px;
-          flex-direction: column;
-      }
-
       .tem-type-group {
           display: flex;
           border-radius: 6px;
           margin-left: 8px;
           padding: 2px 6px;
-
-          @include desktop {
-              margin-left: 0;
-              margin-top: 8px;
-              border-radius: 8px;
-          }
 
           .tem-weakness {
               display: flex;
@@ -59,7 +74,6 @@
 
                 @include desktop {
                     display: block;
-                    font-size: 12px;
                 }
               }
 
@@ -68,11 +82,107 @@
                   height: 20px;
 
                   @include desktop {
-                      width: 50px;
-                      height: 50px;
+                    width: 40px;
+                    height: 40px;
                   }
               }
           }
       }
+  }
+
+  .tem-teamlist {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    height: 55px;
+    overflow-y: auto;
+
+    @include desktop {
+        height: 80px;
+    }
+
+    // Hide scrollbar
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        width: 0px;
+        background: transparent;
+        display: none;
+    }
+
+    .party-member {
+        display: flex;
+        flex-direction: row;
+        overflow: hidden;
+        border-radius: 25px 0 0 25px;
+        width: 50px;
+
+        @include desktop {
+            border-radius: 40px 0 0 40px;
+            width: 80px;
+        }
+
+        &:hover {
+            margin-right: 0;
+            width: auto;
+
+            .effective-moves, .ineffective-moves {
+                transform: translateX(0px);
+            }
+        }
+
+        .weakness-portrait {
+            width: 50px;
+            height: 50px;
+            border: 1px solid $mainColor;
+            border-radius: 50px;
+            background: $darkColor;
+            z-index: 1;
+
+            @include desktop {
+                width: 80px;
+                height: 80px;
+                border: 2px solid $mainColor;
+            }
+        }
+
+        .effective-moves, .ineffective-moves {
+            display: flex;
+            flex-direction: row;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 0 5px 0 55px;
+            margin-left: -60px;
+            height: 50%;
+            max-height: 25px;
+            transform: translateX(-200px);
+            transition: all 0.25s linear;
+
+            @include desktop {
+                max-height: 40px;
+            }
+
+            .effective-type, .ineffective-type {
+                width: 20px;
+                height: 20px;
+
+                @include desktop {
+                    width: 40px;
+                    height: 40px;
+                }
+            }
+        }
+
+        .effective-moves {
+            background: rgb(0, 100, 0);
+            border-radius: 0 12px 0 0;
+        }
+
+        .ineffective-moves {
+            background: rgb(100, 0, 0);
+            border-radius: 0 0 12px 0;
+        }
+    }
   }
 }

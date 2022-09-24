@@ -13,7 +13,7 @@
 		overflow-y: scroll;
 		width: 100%;
 		align-items: center;
-		height: calc(85vh - 40px);
+		height: calc(80vh - 40px);
 		background: rgba(0, 0, 0, 0.5);
 		padding: 30px 0;
 		-webkit-mask-image: linear-gradient(0deg,transparent,#000 5%,#000 95%,hsla(0,0%,100%,0));
@@ -22,6 +22,7 @@
 		@include desktop {
 			padding: 50px 0;
 			gap: 35px;
+			height: calc(80vh - 60px);
 		}
 
 		.tem-missing-warning {
@@ -75,4 +76,6 @@
 
 		@import 'tem.scss';
   }
+
+	@import 'team.scss';
 }

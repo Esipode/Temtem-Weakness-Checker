@@ -1,7 +1,7 @@
 .search {
   width: 350px;
   margin-top: 5vh;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   padding: 0 18px;
   height: 40px;
   border-radius: 40px;
@@ -30,5 +30,56 @@
 
   &:focus {
       border: 2px solid $mainColor;
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: 0.2;
+  }
+}
+
+.toggle-wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 15px;
+
+  .toggle-competitive, .toggle-weaknesses {
+    display: none;
+  }
+  
+  .toggle-competitive-label, .toggle-weaknesses-label {
+    cursor: pointer;
+    position: relative;
+    color: $mainColor;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 28px;
+    font-size: 14px;
+  
+    &:before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      content: '';
+      background: $transBlack;
+      border: 1px solid $mainColor;
+      border-radius: 4px;
+      width: 16px;
+      height: 16px;
+      font-size: 12px;
+      text-align: center;
+      line-height: 16px;
+    }
+  
+    &.checked {
+      &:before {
+        content: '\2713';
+      }
+    }
+  
+    &.disabled {
+      opacity: 0.2;
+      pointer-events: none;
+    }
   }
 }

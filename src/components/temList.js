@@ -1,9 +1,29 @@
-import { useState, useMemo } from 'react';
-import Weaknesses from './weaknesses';
+import { useState, useMemo, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { set } from '../redux/partySlice';
+import { set as setTems } from '../redux/temsSlice';
+import { toggle } from '../redux/competitiveSlice';
+import { toggle as weaknessesToggle } from '../redux/teamWeaknesses';
+import Tem from './tem';
+import Team from './team';
 
-function TemList({ tems }) {
+function TemList() {
+	const dispatch = useDispatch();
+
+	const partyModalOpen = useSelector((state) => state.partyModal.value);
+  const isCompetitive = useSelector((state) => state.competitive.value);
+  const showTeamWeaknesses = useSelector((state) => state.teamWeaknesses.value);
+  const party = useSelector((state) => state.party.value);
+	const tems = useSelector((state) => state.tems.value);
 
 	const [search, setSearch] = useState('');
+
+	// Fetch Temtems from API
+	useEffect(() => {
+		if (!tems.length) {
+			fetch('https://temtem-api.mael.tech/api/temtems?weaknesses=true').then((res) => res.json()).then((data) => dispatch(setTems(data)));
+		}
+	});
 
 	const checkMatchRegex = (tem, searchRegex) => (
 		tem.name.toLowerCase().match(searchRegex) || 
@@ -23,6 +43,19 @@ function TemList({ tems }) {
 		return new Set(temsToShow.map(tem => tem.number));
 	}, [tems, search]);
 
+	const handleCompetitive = () => {
+		dispatch(toggle(!isCompetitive));
+		const teamLength = Object.keys(party).length;
+		if (isCompetitive && teamLength > 6) {
+			let teamCopy = {...party};
+			for (let i = 6; i < teamLength; i++) {
+				teamCopy[Object.keys(party)[i]] = undefined;
+			}
+			
+			dispatch(set(teamCopy));
+		}
+	}
+
 	return (
 		<div className="tem-list">
 			<input 
@@ -30,20 +63,37 @@ function TemList({ tems }) {
 				value={search} 
 				onChange={(e) => setSearch(e.target.value)} 
 				placeholder='Search Temtem here...'
+				disabled={partyModalOpen}
 			/>
+			<div className='toggle-wrapper'>
+				{Object.keys(party || {}).length > 0 ?
+					<>
+						<label 
+							className={`toggle-competitive-label ${isCompetitive ? 'checked' : ''} ${partyModalOpen ? 'disabled' : ''}`} 
+							htmlFor='toggle-competitive'
+						>
+							Competitive Team
+						</label>
+						<input disabled={partyModalOpen} className='toggle-competitive' id='toggle-competitive' type='checkbox' onChange={handleCompetitive} />
+					</>
+				: ''}
+
+				{Object.keys(party || {}).length > 0 ?
+					<>
+						<label 
+							className={`toggle-weaknesses-label ${showTeamWeaknesses ? 'checked' : ''} ${partyModalOpen ? 'disabled' : ''}`} 
+							htmlFor='toggle-weaknesses'
+						>
+							Team Effectiveness
+						</label>
+						<input disabled={partyModalOpen} className='toggle-weaknesses' id='toggle-weaknesses' type='checkbox' onChange={() => dispatch(weaknessesToggle(!showTeamWeaknesses))} />
+					</>
+				: ''}
+			</div>
 			{tems?.length ? 
 				<div className='tem-container'>
 					{tems.map((tem) => (
-						<div className='tem-wrapper' key={tem.name} style={{display: temList.has(tem.number) ? "inherit" : "none"}}>
-							<img className='tem-portrait' src={tem.wikiPortraitUrlLarge} alt={tem.name} />
-							<div className='tem-info'>
-								<div className='tem-title'>
-									<p className='tem-number'>#{tem.number}</p>
-									<h3 className='tem-name'>{tem.name}</h3>
-								</div>
-								<Weaknesses tem={tem} />
-							</div>
-						</div>
+						<Tem tem={tem} hasNumber={temList.has(tem.number)} key={tem.name} />
 					))}
 					{
 						!temList.size && search?.length && (
@@ -54,6 +104,7 @@ function TemList({ tems }) {
 					}
 				</div>
 			: ''}
+			<Team tems={tems} />
 		</div>
 	);
 }

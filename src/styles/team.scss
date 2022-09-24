@@ -1,0 +1,56 @@
+.my-tem-team {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+  padding: 15px 0;
+
+  @include desktop {
+    gap: 10px;
+  }
+
+  .team-member {
+    position: relative;
+
+    .remove-btn {
+      position: absolute;
+      top: 0;
+      right: 0;
+      cursor: pointer;
+      color: $altColor;
+      transition: all 0.1s linear;
+      background: $altDarkColor;
+      border: 1px solid $altColor;
+      border-radius: 20px;
+      text-align: center;
+      line-height: 12px;
+      font-size: 16px;
+      width: 16px;
+      height: 16px;
+
+      &:hover {
+        color: $altMedColor;
+      }
+    }
+
+    .team-portrait {
+      border: 2px solid $mainColor;
+      background: $darkColor;
+      border-radius: 50px;
+      height: 40px;
+      width: 40px;
+      z-index: 1;
+
+      @include desktop {
+        height: 60px;
+        width: 60px;
+      }
+    }
+  }
+}
