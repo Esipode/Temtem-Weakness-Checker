@@ -74,7 +74,11 @@
         border: 1px solid $mainColor;
         border-left: none;
         border-top: none;
-        background: $darkColor;
+        background-color: $darkColor;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        
         border-radius: 0 0 12px 0;
         height: 100px;
         width: 100px;

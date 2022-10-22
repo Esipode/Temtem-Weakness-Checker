@@ -44,7 +44,7 @@ function Weaknesses({ tem, forceMobile }) {
 			if (effectiveMoves.length) {
 				return (
 					<div className='party-member' key={`${partyMember}--weakness`}>
-						<img className='weakness-portrait' src={partyMemberData.wikiPortraitUrlLarge} alt={partyMember} />
+						<div className='weakness-portrait' style={{backgroundImage: `url(${partyMemberData.wikiRenderStaticUrl})`}} />
 						<div className='moves'>
 							<div 
 								className='effective-moves' 

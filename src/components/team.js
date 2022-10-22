@@ -29,7 +29,7 @@ function Team({ tems }) {
         return (
           <div className='team-member' key={tem.name}>
             <div className='remove-btn' onClick={() => handleRemove(tem.name)}>x</div>
-            <img className='team-portrait' src={tem.wikiPortraitUrlLarge} key={tem.name} alt={`team--${tem.name}`} />
+            <div className='team-portrait' style={{backgroundImage: `url(${tem.wikiRenderStaticUrl})`}} />
           </div>
         )
       })}

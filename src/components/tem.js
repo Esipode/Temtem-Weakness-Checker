@@ -14,7 +14,7 @@ function Tem({ tem, hasNumber, inParty = false }) {
 
 	return (
     <div className='tem-wrapper' key={tem.name} style={{display: hasNumber ? "inherit" : "none"}}>
-      <img className='portrait' src={tem.wikiPortraitUrlLarge} alt={tem.name} />
+      <div className='portrait' style={{backgroundImage: `url(${tem.wikiRenderStaticUrl})`}}/>
       <div className='info'>
         <div className='title'>
           <p className='number'>#{tem.number}</p>

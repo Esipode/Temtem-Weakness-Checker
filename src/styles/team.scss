@@ -41,7 +41,10 @@
 
     .team-portrait {
       border: 2px solid $mainColor;
-      background: $darkColor;
+      background-color: $darkColor;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
       border-radius: 50px;
       height: 40px;
       width: 40px;

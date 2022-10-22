@@ -42,7 +42,10 @@ function PartyModal({ tem, enabled }) {
       <div className='party-modal'>
         <div className='close-btn' onClick={() => dispatch(toggle())}>x</div>
         <div className='modal-top'>
-          <img className='modal-portrait' src={tem.wikiPortraitUrlLarge} alt={tem.name} />
+          <div 
+            className='modal-portrait' 
+            style={{backgroundImage: `url(${tem.wikiRenderStaticUrl})`}} 
+          />
           <div className='modal-info'>
             <div className='modal-title'>
               <p className='modal-number'>#{tem.number}</p>
